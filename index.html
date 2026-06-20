@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AkhdanPhone | Link & Service HP</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & Sora -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        sora: ['Sora', 'sans-serif'],
+                    },
+                    colors: {
+                        tech: {
+                            dark: '#080C14',
+                            card: 'rgba(15, 23, 42, 0.6)',
+                            cyan: '#06B6D4',
+                            cyanLight: '#22D3EE',
+                            blue: '#3B82F6',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #060911;
+            background-image: 
+                radial-gradient(circle at 5% 15%, rgba(6, 182, 212, 0.12) 0%, transparent 35%),
+                radial-gradient(circle at 95% 85%, rgba(59, 130, 246, 0.12) 0%, transparent 35%);
+            background-attachment: fixed;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060911;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E293B;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+
+        /* Tab Content Transition */
+        .tab-content {
+            display: none;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: all 0.25s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Glassmorphism Classes */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .glass-btn {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-btn:hover {
+            background: rgba(6, 182, 212, 0.08);
+            border-color: rgba(6, 182, 212, 0.35);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.1);
+        }
+    </style>
+</head>
+<body class="text-slate-200 font-sans min-h-screen flex flex-col justify-between antialiased">
+
+    <!-- Container Utama -->
+    <main class="max-w-md w-full mx-auto px-4 py-10 md:py-14 flex-grow flex flex-col items-center">
+        
+        <!-- BAGIAN PROFIL & LOGO -->
+        <div class="text-center w-full mb-6">
+            <!-- Icon/Avatar dengan Efek Ring Neon -->
+            <div class="relative w-24 h-24 mx-auto mb-4">
+                <div class="absolute inset-0 bg-gradient-to-tr from-cyan-500 to-blue-500 rounded-full blur-md opacity-60 animate-pulse"></div>
+                <!-- Container Logo yang Fleksibel -->
+                <div class="relative w-full h-full rounded-full border-2 border-white/10 p-1 bg-[#060911] flex items-center justify-center overflow-hidden">
+                    <!-- 
+                      LOGO UTAMA (Silakan ganti src di bawah ini dengan file gambar logo Anda, misal: logo.png)
+                      Sistem ini dilengkapi auto-fallback: Jika file tidak ditemukan, ikon default di bawahnya akan langsung menggantikan.
+                    -->
+                    <img id="main-logo-img" 
+                         src="profil.png" 
+                         alt="FixPhone Studio Logo" 
+                         class="w-full h-full rounded-full object-cover z-10 transition-all duration-300"
+                         onerror="this.classList.add('hidden'); document.getElementById('logo-fallback-icon').classList.remove('hidden');">
+                    
+                    <!-- Fallback Icon (Otomatis muncul jika gambar di atas tidak ditemukan/error) -->
+                    <div id="logo-fallback-icon" class="hidden absolute inset-0 w-full h-full rounded-full bg-cyan-950/40 flex items-center justify-center text-cyan-400">
+                        <i data-lucide="smartphone" class="w-10 h-10 absolute opacity-30"></i>
+                        <i data-lucide="wrench" class="w-8 h-8 relative z-10 animate-bounce"></i>
+                    </div>
+                </div>
+                <!-- Status Badge (Buka/Tutup) -->
+                <span class="absolute bottom-0 right-1 bg-emerald-500 border-2 border-slate-950 px-2 py-0.5 rounded-full text-[8px] font-bold text-white flex items-center gap-1 z-20">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span> Buka
+                </span>
+            </div>
+
+            <!-- Nama Jasa Service -->
+            <h1 class="text-xl font-sora font-bold tracking-tight text-white mb-1">RizkyPhone</h1>
+            <p class="text-xs text-slate-400 max-w-xs mx-auto mb-4">
+                Spesialis Perbaikan iPhone & Android. Cepat, Bergaransi & Bisa Ditunggu! 🛠️📱
+            </p>
+
+            <!-- Tiga Keunggulan Utama (Trust Badges) -->
+            <div class="grid grid-cols-3 gap-2 max-w-sm mx-auto mb-6 text-center">
+                <div class="bg-white/5 border border-white/5 rounded-xl py-2 px-1">
+                    <i data-lucide="shield-check" class="w-4 h-4 mx-auto text-cyan-400 mb-1"></i>
+                    <p class="text-[9px] font-semibold text-slate-300">Garansi Layanan</p>
+                </div>
+                <div class="bg-white/5 border border-white/5 rounded-xl py-2 px-1">
+                    <i data-lucide="zap" class="w-4 h-4 mx-auto text-amber-400 mb-1"></i>
+                    <p class="text-[9px] font-semibold text-slate-300">Bisa Ditunggu</p>
+                </div>
+                <div class="bg-white/5 border border-white/5 rounded-xl py-2 px-1">
+                    <i data-lucide="sparkles" class="w-4 h-4 mx-auto text-blue-400 mb-1"></i>
+                    <p class="text-[9px] font-semibold text-slate-300">Konsultasi Gratis</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- NAVIGASI TAB SIMPEL -->
+        <div class="w-full glass-card p-1 rounded-xl flex gap-1 mb-6">
+            <button id="btn-links" onclick="switchTab('links')" class="flex-1 py-2.5 text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-all duration-200 bg-cyan-600 text-white shadow-lg shadow-cyan-600/20">
+                <i data-lucide="phone-call" class="w-3.5 h-3.5"></i> Hubungi Toko
+            </button>
+            <button id="btn-services" onclick="switchTab('services')" class="flex-1 py-2.5 text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-all duration-200 text-slate-400 hover:text-white hover:bg-white/5">
+                <i data-lucide="smartphone" class="w-3.5 h-3.5"></i> Layanan HP
+            </button>
+        </div>
+
+        <!-- AREA KONTEN (TABS) -->
+        <div class="w-full">
+            
+            <!-- TAB 1: LINKS & CONTACTS -->
+            <div id="tab-links" class="tab-content active space-y-3">
+                
+                <!-- Link WhatsApp -->
+                <a href="https://wa.me/6283878524214?text=Halo%20FixPhone%20Studio%2C%20saya%20mau%20tanya%20mengenai%20service%20HP" target="_blank" class="glass-btn flex items-center justify-between p-4 rounded-xl w-full text-left group">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                            <i data-lucide="message-circle" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xs font-bold text-white group-hover:text-cyan-400 transition-colors">WhatsApp Konsultasi</h3>
+                            <p class="text-[10px] text-slate-400">Tanya biaya kerusakan & ketersediaan part</p>
+                        </div>
+                    </div>
+                    <span class="text-[10px] bg-emerald-500/10 text-emerald-400 font-medium px-2 py-0.5 rounded-full flex items-center gap-1">
+                        Fast Respon
+                    </span>
+                </a>
+
+                <!-- Link Google Maps Lokasi -->
+                <a href="https://www.google.com/maps/place/CitraRaya+Tangerang/@-6.2351299,106.5179518,15z/data=!4m10!1m2!2m1!1scitra+raya!3m6!1s0x2e69fd8a379e47e3:0xafd59be67a12c4bc!8m2!3d-6.2308719!4d106.5222036!15sCgpjaXRyYSByYXlhIgOIAQGSARNob3VzaW5nX2RldmVsb3BtZW504AEA!16s%2Fg%2F11bc7t_wzf?entry=ttu&g_ep=EgoyMDI2MDYxNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="glass-btn flex items-center justify-between p-4 rounded-xl w-full text-left group">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-red-500/10 text-red-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                            <i data-lucide="map-pin" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xs font-bold text-white group-hover:text-cyan-400 transition-colors">Lokasi Workshop Kami</h3>
+                            <p class="text-[10px] text-slate-400">Jl. Teknologi No. 45 (Samping Indomaret)</p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500 group-hover:text-cyan-400 transition-colors"></i>
+                </a>
+
+                <!-- Link youtube Portfolio -->
+                <a href="https://youtube.com/@rizkyakhdan_?si=pDMN2d98SeWeIA8T" target="_blank" class="glass-btn flex items-center justify-between p-4 rounded-xl w-full text-left group">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xs font-bold text-white group-hover:text-cyan-400 transition-colors">Youtube Portfolio</h3>
+                            <p class="text-[10px] text-slate-400">Dokumentasi hasil perbaikan harian</p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500 group-hover:text-cyan-400 transition-colors"></i>
+                </a>
+
+                <!-- FORM ESTIMASI & CHAT WA OTOMATIS -->
+                <div class="glass-card p-5 rounded-xl">
+                    <div class="flex items-center gap-2 mb-3">
+                        <div class="w-6 h-6 rounded bg-cyan-500/10 text-cyan-400 flex items-center justify-center">
+                            <i data-lucide="calculator" class="w-3.5 h-3.5"></i>
+                        </div>
+                        <h3 class="font-sora font-semibold text-xs text-white">Ajukan Service (Otomatis ke WA)</h3>
+                    </div>
+
+                    <form id="service-form" onsubmit="handleServiceSubmit(event)" class="space-y-3">
+                        <div>
+                            <label class="block text-[9px] text-slate-400 mb-1 uppercase tracking-wider">Tipe Smartphone</label>
+                            <input type="text" id="phone-model" required class="w-full bg-white/[0.03] border border-white/10 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500 transition-all" placeholder="Contoh: iPhone 12 Pro / Samsung S21">
+                        </div>
+                        <div>
+                            <label class="block text-[9px] text-slate-400 mb-1 uppercase tracking-wider">Jenis Kerusakan</label>
+                            <select id="damage-type" required class="w-full bg-[#0E131F] border border-white/10 rounded-lg px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-cyan-500 transition-all">
+                                <option value="" disabled selected>Pilih kerusakan...</option>
+                                <option value="Ganti Layar LCD">Layar Pecah / LCD Rusak</option>
+                                <option value="Ganti Baterai">Baterai Boros / Kembung</option>
+                                <option value="Tidak Bisa Di-charge">Konektor Charger Rusak</option>
+                                <option value="Mati Total / Masuk Air">Mati Total / Kena Air</option>
+                                <option value="Kamera Buram/Mati">Kamera Bermasalah</option>
+                                <option value="Kerusakan Lainnya">Lainnya (Tulis di pesan)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[9px] text-slate-400 mb-1 uppercase tracking-wider">Catatan Tambahan</label>
+                            <textarea id="additional-notes" rows="2" class="w-full bg-white/[0.03] border border-white/10 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500 transition-all" placeholder="Contoh: Jatuh dari meja lalu bergaris..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs py-2.5 rounded-lg transition-all duration-200 flex items-center justify-center gap-1.5">
+                            <i data-lucide="send" class="w-3.5 h-3.5"></i> Kirim ke WhatsApp
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+
+            <!-- TAB 2: SERVICES & PRICING -->
+            <div id="tab-services" class="tab-content space-y-4">
+                
+                <!-- Info Estimasi & Layanan -->
+                <div class="grid grid-cols-1 gap-3">
+                    
+                    <!-- Layanan 1 -->
+                    <div class="glass-card p-4 rounded-xl flex gap-3 items-start">
+                        <div class="w-10 h-10 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0">
+                            <i data-lucide="smartphone" class="w-5 h-5"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex justify-between items-center mb-1">
+                                <h4 class="font-sora font-semibold text-xs text-white">Ganti Layar LCD</h4>
+                                <span class="text-[9px] bg-amber-500/15 text-amber-400 font-semibold px-2 py-0.5 rounded">30-60 Menit</span>
+                            </div>
+                            <p class="text-[10px] text-slate-400 leading-relaxed">Perbaikan layar pecah, blank, berkedip, atau bergaris menggunakan part original / berkualitas terbaik.</p>
+                        </div>
+                    </div>
+
+                    <!-- Layanan 2 -->
+                    <div class="glass-card p-4 rounded-xl flex gap-3 items-start">
+                        <div class="w-10 h-10 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0">
+                            <i data-lucide="battery-charging" class="w-5 h-5"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex justify-between items-center mb-1">
+                                <h4 class="font-sora font-semibold text-xs text-white">Penggantian Baterai</h4>
+                                <span class="text-[9px] bg-amber-500/15 text-amber-400 font-semibold px-2 py-0.5 rounded">20-30 Menit</span>
+                            </div>
+                            <p class="text-[10px] text-slate-400 leading-relaxed">Atasi baterai kesehatan rendah (health drop), kembung, boros, atau cepat mati tiba-tiba.</p>
+                        </div>
+                    </div>
+
+                    <!-- Layanan 3 -->
+                    <div class="glass-card p-4 rounded-xl flex gap-3 items-start">
+                        <div class="w-10 h-10 rounded-lg bg-red-500/10 text-red-400 flex items-center justify-center shrink-0">
+                            <i data-lucide="cpu" class="w-5 h-5"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex justify-between items-center mb-1">
+                                <h4 class="font-sora font-semibold text-xs text-white">Mesin & IC Repair</h4>
+                                <span class="text-[9px] bg-red-500/15 text-red-400 font-semibold px-2 py-0.5 rounded">1-3 Hari</span>
+                            </div>
+                            <p class="text-[10px] text-slate-400 leading-relaxed">Perbaikan tingkat lanjut untuk HP mati total karena konslet, kerusakan IC Power, WiFi, audio, maupun terkena air.</p>
+                        </div>
+                    </div>
+
+                    <!-- Layanan 4 -->
+                    <div class="glass-card p-4 rounded-xl flex gap-3 items-start">
+                        <div class="w-10 h-10 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center shrink-0">
+                            <i data-lucide="database" class="w-5 h-5"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex justify-between items-center mb-1">
+                                <h4 class="font-sora font-semibold text-xs text-white">Sistem & Software</h4>
+                                <span class="text-[9px] bg-amber-500/15 text-amber-400 font-semibold px-2 py-0.5 rounded">1-2 Jam</span>
+                            </div>
+                            <p class="text-[10px] text-slate-400 leading-relaxed">Perbaikan masalah bootloop (logo mentok), lupa pola/sandi kunci, update OS, restore data, dan bypass akun.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- NOTIFIKASI TOAST SUKSES -->
+    <div id="toast-notification" class="fixed bottom-6 right-6 max-w-xs w-full bg-slate-900 border border-cyan-500/20 text-slate-100 p-4 rounded-xl shadow-2xl flex items-start gap-3 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none z-50">
+        <div class="w-7 h-7 rounded-full bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0">
+            <i data-lucide="check" class="w-4 h-4"></i>
+        </div>
+        <div>
+            <h4 class="font-sora font-semibold text-[11px] text-white">Permintaan Diproses</h4>
+            <p class="text-[9px] text-slate-400 mt-0.5">Membuka aplikasi WhatsApp untuk berkonsultasi langsung.</p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="w-full text-center py-6 text-[10px] text-slate-500 border-t border-white/5 mt-8 bg-black/15">
+        <p>&copy; 2026 RizkyPhone. All Rights Reserved.</p>
+        <p class="mt-1 text-slate-600">Pelayanan Terbaik demi Gadget Kesayangan Anda</p>
+    </footer>
+
+    <!-- SCRIPT LOGIKA HALAMAN -->
+    <script>
+        // Memulai icon lucide
+        lucide.createIcons();
+
+        // Navigasi Tab
+        function switchTab(tabId) {
+            // Sembunyikan semua konten tab
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Ganti tab aktif saat ini
+            const activeContent = document.getElementById(`tab-${tabId}`);
+            activeContent.classList.add('active');
+
+            // Ganti desain tombol navigasi
+            const btnLinks = document.getElementById('btn-links');
+            const btnServices = document.getElementById('btn-services');
+
+            // Setel ulang semua tombol ke non-aktif
+            [btnLinks, btnServices].forEach(btn => {
+                btn.className = "flex-1 py-2.5 text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-all duration-200 text-slate-400 hover:text-white hover:bg-white/5";
+            });
+
+            // Ubah tombol yang aktif
+            const activeBtn = document.getElementById(`btn-${tabId}`);
+            activeBtn.className = "flex-1 py-2.5 text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-all duration-200 bg-cyan-600 text-white shadow-lg shadow-cyan-600/20";
+        }
+
+        // Penanganan Pengiriman Form Konsultasi
+        function handleServiceSubmit(event) {
+            event.preventDefault();
+            
+            const phoneModel = document.getElementById('phone-model').value;
+            const damageType = document.getElementById('damage-type').value;
+            const notes = document.getElementById('additional-notes').value;
+
+            // Membuat format pesan WhatsApp otomatis
+            const formText = `Halo FixPhone Studio, saya ingin konsultasi perbaikan HP:\n\n📱 *Tipe HP:* ${phoneModel}\n🔧 *Jenis Kerusakan:* ${damageType}\n📝 *Detail Tambahan:* ${notes || '-'}`;
+            const encodedText = encodeURIComponent(formText);
+            
+            // Ganti dengan nomor WhatsApp aktif Anda (tanpa tanda +, diawali kode negara 62)
+            const whatsappNumber = "6281234567890";
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedText}`;
+
+            // Tampilkan Notifikasi Toast kustom
+            const toast = document.getElementById('toast-notification');
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            // Reset formulir
+            document.getElementById('service-form').reset();
+
+            // Sembunyikan Toast setelah 4 detik
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 4000);
+
+            // Buka link WhatsApp setelah jeda singkat
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+            }, 800);
+        }
+    </script>
+</body>
+</html>
